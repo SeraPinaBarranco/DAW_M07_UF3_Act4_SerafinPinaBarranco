@@ -11,7 +11,9 @@
         return $mysqli;
     }
 
-    function comprobarUsuario($conn, $query)
+
+
+    function consultaBasica($conn, $query)
     {
         return mysqli_query($conn, $query);
     }
