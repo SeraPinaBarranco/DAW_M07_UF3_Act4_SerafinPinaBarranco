@@ -22,6 +22,18 @@
         return $filas;
     }
 
+    
+    //devuelve el número de filas afectadas en la consulta previa
+    function obtener_num_filas($query){
+        return mysqli_num_rows($query);
+	}
+    
+    function duplicados($conn){
+        $num = mysqli_affected_rows($conn);
+        return $num;
+
+    }
+
     function cerrarConexion($conn)
     {
         mysqli_close($conn);
