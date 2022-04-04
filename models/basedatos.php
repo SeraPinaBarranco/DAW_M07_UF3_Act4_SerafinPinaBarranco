@@ -24,6 +24,12 @@
         return $filas;
     }
 
+    function consulta_assoc($conn, $query){
+        $resultado= mysqli_query($conn, $query);
+        $filas= mysqli_fetch_assoc($resultado);
+        return $filas;
+    }
+
     
     //devuelve el número de filas afectadas en la consulta previa
     function obtener_num_filas($query){

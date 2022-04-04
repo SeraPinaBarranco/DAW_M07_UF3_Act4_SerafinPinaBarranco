@@ -1,4 +1,4 @@
-<?php
+<?php    
     echo "Admin";
 ?>
 
@@ -21,10 +21,10 @@
             <a href="administrador/altaUsuarios.php">Dar alta <strong>usuarios</strong></a>
         </div>
         <div class="row m-3">
-            <a href="">Dar alta <strong>asignaturas</strong></a>
+            <a href="administrador/altaAsignaturas.php">Dar alta <strong>asignaturas</strong></a>
         </div>
         <div class="row m-3">
-            <a href="">Poner <strong>nota</strong> </a>
+            <a href="administrador/ponerNota.php">Poner <strong>nota</strong> </a>
         </div>
         <div class="row m-3">
             <a href="">Modificar <strong>datos</strong></a>
