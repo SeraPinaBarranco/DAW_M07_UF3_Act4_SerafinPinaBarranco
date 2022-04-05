@@ -36,7 +36,7 @@
         return mysqli_num_rows($query);
 	}
     
-    function duplicados($conn){
+    function filas_afectadas($conn){
         $num = mysqli_affected_rows($conn);
         return $num;
 

@@ -1,5 +1,6 @@
 <?php
 require_once "../models/basedatos.php";
+$conn= connDB();
     if($_POST){
         $dni = $_POST['dni'];
         $apellido = $_POST['apellido'];
@@ -39,6 +40,7 @@ require_once "../models/basedatos.php";
     <title>Document</title>
 </head>
 <body>
+    <div class="row"><a href="../administradores.php">Ir a menú administradores</a></div>
     <div class="container col-3 mt-5">
         <div class="row">
             <h3>Nuevo usuario</h3>

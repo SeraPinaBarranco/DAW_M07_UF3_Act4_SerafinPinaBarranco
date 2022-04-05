@@ -27,13 +27,13 @@
             <a href="administrador/ponerNota.php">Poner <strong>nota</strong> </a>
         </div>
         <div class="row m-3">
-            <a href="">Modificar <strong>datos</strong></a>
+            <a href="administrador/modificar_datos.php">Modificar <strong>datos</strong></a>
         </div>
         <div class="row m-3">
-            <a href="">Eliminar <strong>usuarios</strong></a>
+            <a href="administrador/modificar_datos.php">Eliminar <strong>usuarios (ESTA OPCION ESTA HECHA EN MODIFICAR DATOS)</strong></a>
         </div>
         <div class="row m-3">
-            <a href="">Visualizar notas</a>
+            <a href="administrador/visualizar_notas.php">Visualizar notas</a>
         </div>
     </div>
     

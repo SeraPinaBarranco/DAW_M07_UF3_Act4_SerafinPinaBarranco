@@ -10,24 +10,28 @@
         $query= "INSERT INTO nota (alumno, asignatura, nota) VALUES ('".$alumno . "'," . $asignatura . ", $nota)";   
 
         //echo($alumno . " - " . $asignatura . " - "  . $nota);
-        echo $query;
+        //echo $query;
+        $c = consultaBasica($conn, $query);//Guarda el resultado de la consulta
+        $n = filas_afectadas($conn);//Guarda el numero de filas affectadad
 
-        if(consultaBasica($conn, $query)){
-            cerrarConexion($conn);
+        if($c){     
+            $msg = "";       
             header("Location: ../administradores.php");
         }else{
-            echo "No guardado";
+            $msg= "No guardado, Valores duplicados o mal introducidos";
         }    
+        cerrarConexion($conn);
     }
     
     //traer los alumnos
+    $conn= connDB();
     $query = "SELECT * FROM usuario WHERE tipo_usuario=1";
     $resultado_alumumnos= consultaBasica($conn, $query);  
 
     //traer las asignaturas
     $query = "SELECT * FROM asignatura";
     $resultado_asignatura= consultaBasica($conn, $query);  
-    
+    cerrarConexion($conn);
     
     // }else{
     //     echo "Error al recibir kis alumnos";
@@ -46,6 +50,7 @@
     <title>Pon Notas</title>
 </head>
 <body>
+    <div class="row"><a href="../administradores.php">Ir a menú administradores</a></div>
     <div class="container col-3 mt-5">
         <div class="row">
             <h3>Poner nota</h3>
@@ -87,6 +92,9 @@
                   
                     <div class="row">
                         <input class="btn btn-primary col-3 m-4" type="submit" value="Guardar" name="guardar">
+                    </div>
+                    <div>
+                        <span class="badge bg-danger"><?php if(!empty($msg))echo $msg; ?></span>
                     </div>
             
             </form>

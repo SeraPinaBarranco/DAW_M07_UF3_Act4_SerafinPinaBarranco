@@ -36,6 +36,7 @@ require_once "../models/basedatos.php";
     <title>Alta Asignaturas</title>
 </head>
 <body>
+    <div class="row"><a href="../administradores.php">Ir a menú administradores</a></div>
     <div class="container col-3 mt-5">
         <div class="row">
             <h3>Nueva asignatura</h3>

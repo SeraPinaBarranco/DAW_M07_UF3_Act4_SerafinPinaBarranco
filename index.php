@@ -48,7 +48,7 @@
                 $query = "SELECT tipo_usuario FROM usuario WHERE dni='" . $dni . "' and apellido= '" . $apellido . "'";
                 $resultado = consulta($conexion, $query);
 
-                $num_filas= duplicados($conexion);
+                $num_filas= filas_afectadas($conexion);
                 
                 //si trae resultados de la base de datos
                 if($num_filas == 1){
