@@ -20,7 +20,7 @@
     <title>Ver notas de usuario</title>
 </head>
 <body>
-
+    <div class="row"><a href="../administradores.php">Ir a menú administradores</a></div>
     <div class="container col-3">
         <div class="row">
             <h3>Selección de usuario</h3>
@@ -47,6 +47,10 @@
         if($_POST){
             //Traer la consulta con las notas
             $dni = $_POST['alumno'];
+            $query="SELECT apellido FROM usuario WHERE dni= '" . $dni ."'";
+            $alumn= consulta_assoc($conn,$query);
+            extract($alumn);
+
             $query = "SELECT u.dni, u.apellido, u.tipo_usuario, 
                 a.identificador, a.nombre, 
                 n.alumno, n.asignatura, n.nota 
@@ -54,16 +58,35 @@
                 where n.alumno = u.dni and
                 n.asignatura = a.identificador
                 and n.alumno= '" . $dni ."' ";
+             $res= consultaBasica($conn, $query);
+             
+                echo "<div class='row mt-5'>
+                        <h3>Notas de <strong>$apellido</strong></h3>
+                    </div>";
 
-            if($fila = consulta_assoc($conn, $query)){
+                echo "<table class='table'>
+                        <tr>
+                            <td>Asisnatura</td>
+                            <td>Calificación</td>
+                    </tr>";
+            while($fila = mysqli_fetch_array($res)){
                 extract($fila);
-                echo $dni;
-
-            }else{
-                echo "Este alumno no tiene notas";
-            }
-
+                    echo "<tr>";
+                    echo "<td>";
+                    echo $nombre;
+                    echo "</td>";
+                    echo "<td>";
+                    echo $nota;
+                    echo "</td>";
+                    echo "</tr>";
+                    
+            }  
+                echo "</table>";
+        }else{
+            echo "Este alumno no tiene notas";
         }
+
+      
         ?>
 
 
