@@ -1,3 +1,15 @@
+<?php 
+ session_start();
+ if(isset($_SESSION['dni']) && isset($_SESSION['apellido'])){
+    //si hay session creada e intenta volver al indice sin logarte
+    //te devuelve a la página segun el usuario que sea     
+     if( $_SESSION['tipo'] === "1"){
+         header("Location: alumnos.php");
+     }else{
+        header("Location: administradores.php");
+     }     
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,11 +25,11 @@
 
 <body>
 
-    <div class="container mt-5" id="contenedor">
+    <div class="container col-3 mt-5" id="contenedor">
         <div class="row mb-3">
             <h3>Validación de usuarios</h3>
         </div>
-        <div class="row col-3">
+        <div class="row">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <div class="mb-3">
                     <label for="dni" class="form-label">Introduce el DNI</label>
@@ -35,6 +47,8 @@
         </div>
 
         <?php
+        //session_start();
+        
         require_once "models/basedatos.php";
         $conexion = connDB();
 
@@ -54,7 +68,10 @@
                 if($num_filas == 1){
                     extract($resultado);
                     $tipo = $tipo_usuario;
-                    echo $tipo;
+                    $_SESSION['dni'] = $dni;//guarda usuario y apellido en la sesion
+                    $_SESSION['apellido'] = $apellido;
+                    $_SESSION['tipo'] = $tipo_usuario;
+                    
                     cerrarConexion($conexion);
                     if ($tipo == 0) {
                         header("Location: administradores.php");

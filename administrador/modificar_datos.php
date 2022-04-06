@@ -1,4 +1,15 @@
 <?php
+    session_start();
+    //si no hay session te devuelve al indice
+    if(!isset($_SESSION['dni']) && !isset($_SESSION['apellido'])){
+        header("Location: ../index.php");
+    }
+    //si la session no es de administrador no deja entrar
+    if($_SESSION['tipo']=== "1"){
+        header("Location: ../logout.php");
+
+    }
+    
     require_once "../models/basedatos.php";
     $conn= connDB();
     
@@ -36,6 +47,9 @@
     <title>Modificar datos</title>
 </head>
 <body>
+    <div class="row" style="text-align: right;">
+        <a href="../logout.php">LOGOUT</a>
+    </div>
     <div class="row"><a href="../administradores.php">Ir a menú administradores</a></div>
     <div class="container col-4 mt-5">
         <div class="row">

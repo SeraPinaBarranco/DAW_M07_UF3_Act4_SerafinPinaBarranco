@@ -1,26 +1,42 @@
 <?php
+    session_start();
+    //si no hay session te devuelve al indice
+    if(!isset($_SESSION['dni']) && !isset($_SESSION['apellido'])){
+        header("Location: ../index.php");
+    }
+    //si la session no es de administrador no deja entrar
+    if($_SESSION['tipo']=== "1"){
+        header("Location: ../logout.php");
+
+    }
+    
     require_once "../models/basedatos.php";
     $conn= connDB();
 
     if($_POST){
-        $alumno = $_POST['alumno'];
-        $asignatura = $_POST['asignatura'];
-        $nota = floatval($_POST['nota']);
+        if(!empty($_POST['alumno']) && !empty($_POST['asignatura']) && !empty($_POST['nota']) ){
 
-        $query= "INSERT INTO nota (alumno, asignatura, nota) VALUES ('".$alumno . "'," . $asignatura . ", $nota)";   
-
-        //echo($alumno . " - " . $asignatura . " - "  . $nota);
-        //echo $query;
-        $c = consultaBasica($conn, $query);//Guarda el resultado de la consulta
-        $n = filas_afectadas($conn);//Guarda el numero de filas affectadad
-
-        if($c){     
-            $msg = "";       
-            header("Location: ../administradores.php");
+            $alumno = $_POST['alumno'];
+            $asignatura = $_POST['asignatura'];
+            $nota = floatval($_POST['nota']);
+    
+            $query= "INSERT INTO nota (alumno, asignatura, nota) VALUES ('".$alumno . "'," . $asignatura . ", $nota)";   
+    
+            //echo($alumno . " - " . $asignatura . " - "  . $nota);
+            //echo $query;
+            $c = consultaBasica($conn, $query);//Guarda el resultado de la consulta
+            $n = filas_afectadas($conn);//Guarda el numero de filas affectadad
+    
+            if($c){     
+                $msg = "";       
+                header("Location: ../administradores.php");
+            }else{
+                $msg= "No guardado, Valores duplicados o mal introducidos";
+            }    
+            cerrarConexion($conn);            
         }else{
-            $msg= "No guardado, Valores duplicados o mal introducidos";
-        }    
-        cerrarConexion($conn);
+            $msg = "Error en los datos";
+        } 
     }
     
     //traer los alumnos
@@ -50,6 +66,9 @@
     <title>Pon Notas</title>
 </head>
 <body>
+    <div class="row" style="text-align: right;">
+        <a href="../logout.php">LOGOUT</a>
+    </div>
     <div class="row"><a href="../administradores.php">Ir a menú administradores</a></div>
     <div class="container col-3 mt-5">
         <div class="row">

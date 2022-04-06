@@ -1,4 +1,9 @@
 <?php 
+    session_start();
+    //si no hay session te devuelve al indice
+    if(!isset($_SESSION['dni']) && !isset($_SESSION['apellido'])){
+        header("Location: ../index.php");
+    }
     require_once "../models/basedatos.php";
     $conn= connDB();
     

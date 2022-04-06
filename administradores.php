@@ -1,5 +1,14 @@
-<?php    
-    echo "Admin";
+<?php
+    session_start();
+    //si no hay session te devuelve al indice
+    if(!isset($_SESSION['dni']) && !isset($_SESSION['apellido'])){
+        header("Location: index.php");
+    }
+    //si la session no es de administrador no deja entrar
+    if($_SESSION['tipo']=== "1"){
+        header("Location: logout.php");
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +22,11 @@
     <title>ADMINISTRADORES</title>
 </head>
 <body>
+    <div class="container">
+        <div class="row text-end">
+            <a href="logout.php">LOGOUT</a>
+        </div>
+    </div>
     <div class="container">
         <div class="row mt-5">
             <h3>MENÚ ADMINISTRADOR</h3>
